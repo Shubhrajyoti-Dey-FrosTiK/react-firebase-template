@@ -1,70 +1,64 @@
-# Getting Started with Create React App
+# React Firebase Template
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project shows how to integrate React with Firebase.
 
-## Available Scripts
+Till now these are integrated in the project :
+```
+1. FireStore
+```
 
-In the project directory, you can run:
+# Getting Started 
 
-### `npm start`
+1. Open terminal 
+2. Then run these commands
+3. ```git clone https://github.com/Shubhrajyoti-Dey-FrosTiK/react-firebase-template.git```
+4. ```cd react-firebase-template```
+5. ```npm i```
+6. ```touch .env```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Now open your IDE and go to the `.env` file and paste the Google Firebase credentials here.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Example : 
 
-### `npm test`
+```.js
+REACT_APP_FIREBASE_API_KEY = '...'
+REACT_APP_FIREBASE_AUTH_DOMAIN = '...'
+REACT_APP_FIREBASE_PROJECT_ID = '...'
+REACT_APP_FIREBASE_STORAGE_BUCKET = '...'
+REACT_APP_FIREBASE_MESSAGING_SENDER_ID = '...'
+REACT_APP_FIREBASE_APP_ID = '...'
+REACT_APP_FIREBASE_MEASUREMENT_ID = '...'
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Now to start the server run `npm start` in the terminal.
 
-### `npm run build`
+Your React App integrated with firebase is complete. Now start editing the App.js to customize your app.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+# Usage
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+This template contains 2 folders 
+1. services
+2. constants
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+`services` folder contains all the firebase functions you will need. 
 
-### `npm run eject`
+So import the module to your file where you want firebase.
+```
+import { FireStoreService } from "<relative_path>";
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Now initialize the class object 
+```
+const FS = new FireStoreService();
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Now access all the functions through the FS object.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Example : 
+```.js
+  // Add User
+  FS.add("users", { userId: "1", name: "SD" });
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+  // Get all Users ( Here res object is the response )
+  Promise.resolve(FS.getAll("users")).then((res) => console.log(res));
+```
