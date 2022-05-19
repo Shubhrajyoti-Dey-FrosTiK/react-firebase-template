@@ -1,7 +1,16 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+import { FireStoreService } from "./services/Firebase/fireStore.service";
 
 function App() {
+  const FS = new FireStoreService();
+
+  // Add User
+  // FS.add("users", { userId: "1", name: "SD" });
+
+  // Get all Users ( Here res object is the response )
+  // Promise.resolve(FS.getAll("users")).then((res) => console.log(res));
+
   return (
     <div className="App">
       <header className="App-header">
